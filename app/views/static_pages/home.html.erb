@@ -110,7 +110,7 @@ WebFont.load({
     </div>
 
   </div>
-  <img class="laptop" src="assets/bgpic.png" width="800" alt="5336fa172c15f81041000697_bgpic.png">
+  <%= image_tag "bgpic.png", width: 800, class: "laptop" %>
 </div>
   
 <div class="section grey">
@@ -119,21 +119,21 @@ WebFont.load({
       <div class="w-container how-it-works">
         <div class="stepmain">STEP 1:&nbsp;Record &nbsp;Through Your Device.
           <br>(Only Chrome Compatible)</div>
-        <img class="icon" src="assets/Device-Laptop-256.png" width="128" alt="5336ffa42c15f810410006ca_Device-Laptop-256.png">
+          <%= image_tag "Device-Laptop-256.png", width: 128, class: "icon" %>
       </div>
     </div>
     <div class="w-col w-col-4">
       <div class="w-container how-it-works">
         <div class="stepmain">STEP 2:&nbsp;Our Engine Will Convert Audio into
           <br>Clear and Coherent Notes via NLP.</div>
-        <img class="icon" src="assets/Filter-New-256.png" width="128" alt="5336ffe5b51c26e31e0006d1_Filter-New-256.png">
+          <%= image_tag "Filter-New-256.png", width: 128, class: "icon" %>
       </div>
     </div>
     <div class="w-col w-col-4">
       <div class="w-container how-it-works">
         <div class="stepmain">STEP 3:&nbsp;Export to Dropbox, Evernote,
           <br>or Google Docs.&nbsp;</div>
-        <img class="icon" src="assets/Document-01-256.png" width="128" alt="5336ffeeb51c26e31e0006e8_Document-01-256.png">
+          <%= image_tag "Document-01-256.png", width: 128, class: "icon" %>
       </div>
     </div>
   </div>
@@ -152,6 +152,6 @@ WebFont.load({
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="assets/struc.js"></script>
 <!-- classie.js by @desandro: https://github.com/desandro/classie -->
-<script src="assets/classie.js"></script>
-<script src="assets/modalEffects.js"></script>
-<script src="assets/speech.js"></script>
+<%= javascript_include_tag "classie" %>
+<%= javascript_include_tag "modalEffects" %>
+<%= javascript_include_tag "speech" %>
