@@ -1,4 +1,4 @@
-//////////// Languages
+        //////////// Languages
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -90,6 +90,7 @@ var recognizing = false;
 var fileselected = false;
 var ignore_onend;
 var start_timestamp;
+var prevTopics = [];
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
@@ -189,15 +190,20 @@ if (!('webkitSpeechRecognition' in window)) {
               if (data.concepts[0].relevance > 0.75)
               {
                 // found a topic
+                prevTopics.push(data.concepts[0].text);
                 final_span.innerHTML += "<li style='color:blue;'>" + data.concepts[0].text + "</li>";
-                writefile(all_text);
               }
             }
+            temp = $('#final_temp');
+            final_span.innerHTML += temp[0].innerHTML;
+            console.log($('#final_temp li')[2]);
+            writefile(all_text);
+            temp[0].innerHTML = "";
           },
           data: { outputMode: "json", text: all_text, apikey: "12c03efad5071dc17762332480c35cf703a3315b" }
         });
       }
-      final_span.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
+      final_temp.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
       // bit of a hack...inefficient
       $('.bullet-point').hover(function(){
         $(this).css("color", "black");
