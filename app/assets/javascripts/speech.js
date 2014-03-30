@@ -204,7 +204,7 @@ if (!('webkitSpeechRecognition' in window)) {
           data: { outputMode: "json", text: all_text, apikey: "12c03efad5071dc17762332480c35cf703a3315b" }
         });
       }
-      final_temp.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
+      final_temp.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + "</li>";
       // bit of a hack...inefficient
       $('.bullet-point').hover(function(){
         $(this).css("color", "black");
