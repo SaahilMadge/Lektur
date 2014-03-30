@@ -144,12 +144,6 @@ if (!('webkitSpeechRecognition' in window)) {
       createEmail();
     }
   };
-  recognition.speechend = function(event) {
-    console.log('speech end hit');
-  }
-  recognition.soundend = function(event) {
-    console.log('sound end hit');
-  }
 
   recognition.onresult = function(event) {
     var interim_transcript = '';
@@ -174,14 +168,12 @@ if (!('webkitSpeechRecognition' in window)) {
       }
     }
     final_transcript = capitalize(final_transcript);
-    console.log(final_transcript);
     if (final_transcript)
     {
       final_span.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
       // bit of a hack...inefficient
       $('.bullet-point').hover(function(){
-        $(this).css(color, "blue");
-        console.log("BLUE");
+        $(this).css("color", "black");
       });
     }
     interim_span.innerHTML = linebreak(interim_transcript);
