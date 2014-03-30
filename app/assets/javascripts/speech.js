@@ -189,9 +189,9 @@ if (!('webkitSpeechRecognition' in window)) {
             if (data.concepts.length > 0) {
               if (data.concepts[0].relevance > 0.75)
               {
-                // found a topic
-                prevTopics.push(data.concepts[0].text);
-                final_span.innerHTML += "<li style='color:blue;'>" + data.concepts[0].text + "</li>";
+
+                final_span.innerHTML += "<li style='color:#AEEEEE;'>" + data.concepts[0].text + "</li>";
+                writefile(all_text);
               }
             }
             temp = $('#final_temp');

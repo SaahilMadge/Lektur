@@ -84,13 +84,17 @@ p {
 }
 
 #results {
+  overflow: scroll;
   font-size: 14px;
   font-weight: bold;
   border: 1px solid #ddd;
   padding: 15px;
   text-align: left;
-  min-height: 150px;
+  height: 350px;
   background: #fff;
+}
+#final_span {
+  outline:none;
 }
 
 #start_button {

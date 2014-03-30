@@ -11,7 +11,7 @@ WebFont.load({
   }
 });
 </script>
-
+  
 
 <header class="navbar">
   <div class="w-container">
@@ -86,16 +86,18 @@ WebFont.load({
                   "//www.google.com/chrome">Chrome</a> version 25 or later.
                 </p>
               </div>
-              <div id="div_start">
-                  <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
-                      src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif"></button>
-              </div>
+        
               <div id="results">
                   <ul class = "final" id = "final_span" contenteditable="true"></ul>
                   <ul class="final" id="final_temp" contenteditable="true"></ul> <span class="interim" id=
                   "interim_span"></span>
               </div>
-            
+              <br>
+              <div id="div_start">
+              <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
+                  src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif"></button>
+              </div>
+
               <div class="compact marquee" id="div_language">
                 <select id="select_language" onchange="updateCountry()">
                   </select>&nbsp;&nbsp; <select id="select_dialect">
@@ -104,7 +106,12 @@ WebFont.load({
           </div>
          
               </div>
-          <button class="md-close" style="float:right;" font-size="70">Close</button>
+
+          <button style="float:left; font-size: 20px; padding-left: 10px;">IMPORT.</button>
+          <button style="float:left; font-size: 20px; margin-left: 20px;">EXPORT.</button>
+
+          <button class="md-close" style="float:right; font-size: 20px;">CLOSE.</button>
+
         </div>
       </div>
     </div>
