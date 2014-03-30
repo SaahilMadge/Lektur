@@ -1,4 +1,4 @@
-        //////////// Languages
+//////////// Languages
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -190,14 +190,15 @@ if (!('webkitSpeechRecognition' in window)) {
             if (data.concepts.length > 0) {
               if (data.concepts[0].relevance > 0.75)
               {
-
                 final_span.innerHTML += "<li style='color:#AEEEEE;'>" + data.concepts[0].text + "</li>";
-                writefile(all_text);
+                if (inkblob)
+                  writefile(all_text);
               }
             }
             temp = $('#final_temp');
             final_span.innerHTML += temp[0].innerHTML;
-            writefile(all_text);
+            if (inkblob)
+              writefile(all_text);
             temp[0].innerHTML = "";
           },
           data: { outputMode: "json", text: all_text, apikey: "12c03efad5071dc17762332480c35cf703a3315b" }
@@ -264,44 +265,51 @@ function emailButton() {
   email_info.style.display = 'inline-block';
   showInfo('');
 }
+function importButton(event) {
+  filepicker.pick({mimetype:'text/plain'}, function(InkBlob){
+    inkblob = InkBlob;
+    filepicker.read(inkblob, function(data){
+      final_span.innerHTML = data;
+      all_text = data;
+    });
+    fileselected = true;
+  });
+}
+
+function exportButton(event) {
+  if (inkblob) {
+    filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
+      showInfo('info_saved');
+    });
+  }
+  else {
+    filepicker.store(all_text,
+        {filename:'lecture_notes.txt', location: 'S3'},
+        function(stored_file){
+            filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
+                $("#filename-title").text(InkBlob.filename);
+                inkblob = InkBlob;
+            }
+        );
+    });
+  }
+}
 
 function startButton(event) {
   if (recognizing) {
     recognition.stop();
     return;
   }
-  if (!fileselected) {
-    filepicker.pick(function(InkBlob){
-      inkblob = InkBlob;
-      filepicker.read(inkblob, function(data){
-        debugger;
-        final_span.innerHTML = data;
-      });
-      fileselected = true;
-      final_transcript = '';
-      recognition.lang = select_dialect.value;
-      recognition.start();
-      ignore_onend = false;
-      //final_span.innerHTML = '';
-      interim_span.innerHTML = '';
-      start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-      showInfo('info_allow');
-      showButtons('none');
-      start_timestamp = event.timeStamp;
-    });
-  }
-  else {
-    final_transcript = '';
-    recognition.lang = select_dialect.value;
-    recognition.start();
-    ignore_onend = false;
-    //final_span.innerHTML = '';
-    interim_span.innerHTML = '';
-    start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-    showInfo('info_allow');
-    showButtons('none');
-    start_timestamp = event.timeStamp;
-  }
+  final_transcript = '';
+  recognition.lang = select_dialect.value;
+  recognition.start();
+  ignore_onend = false;
+  //final_span.innerHTML = '';
+  interim_span.innerHTML = '';
+  start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
+  showInfo('info_allow');
+  showButtons('none');
+  start_timestamp = event.timeStamp;
 }
 
 function showInfo(s) {
