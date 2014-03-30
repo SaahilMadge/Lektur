@@ -144,9 +144,17 @@ if (!('webkitSpeechRecognition' in window)) {
       createEmail();
     }
   };
+  recognition.speechend = function(event) {
+    console.log('speech end hit');
+  }
+  recognition.soundend = function(event) {
+    console.log('sound end hit');
+  }
 
   recognition.onresult = function(event) {
     var interim_transcript = '';
+    final_transcript = '';
+    var color;
     if (typeof(event.results) == 'undefined') {
       recognition.onend = null;
       recognition.stop();
@@ -155,6 +163,11 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
+        console.log(event.results[i][0].confidence + "for : " + event.results[i][0])
+        if (event.results[i][0].confidence > 0.75)
+          color = "rgb(" + Math.round(150-150*4*(event.results[i][0].confidence-.75)) + ",255," + Math.round(150-150*4*(event.results[i][0].confidence-.75)) + ")";
+        else
+          color = "rgb(255, " + Math.round(200*event.results[i][0].confidence) + "," + Math.round(200*event.results[i][0].confidence) + ")";
         final_transcript += event.results[i][0].transcript;
       } else {
         interim_transcript += event.results[i][0].transcript;
@@ -162,7 +175,15 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     final_transcript = capitalize(final_transcript);
     console.log(final_transcript);
-    final_span.innerHTML += linebreak(final_transcript);
+    if (final_transcript)
+    {
+      final_span.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
+      // bit of a hack...inefficient
+      $('.bullet-point').hover(function(){
+        $(this).css(color, "blue");
+        console.log("BLUE");
+      });
+    }
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
