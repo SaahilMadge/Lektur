@@ -269,18 +269,9 @@ function importButton(event) {
     inkblob = InkBlob;
     filepicker.read(inkblob, function(data){
       final_span.innerHTML = data;
+      all_text = data;
     });
     fileselected = true;
-    final_transcript = '';
-    recognition.lang = select_dialect.value;
-    recognition.start();
-    ignore_onend = false;
-    //final_span.innerHTML = '';
-    interim_span.innerHTML = '';
-    start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-    showInfo('info_allow');
-    showButtons('none');
-    start_timestamp = event.timeStamp;
   });
 }
 
