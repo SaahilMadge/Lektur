@@ -178,6 +178,7 @@ if (!('webkitSpeechRecognition' in window)) {
       all_text += final_transcript;
       if ((counter%4) == 0)
       {
+        counter = 0;
         $.ajax({
           type: "GET",
           crossDomain: true,
@@ -196,7 +197,6 @@ if (!('webkitSpeechRecognition' in window)) {
             }
             temp = $('#final_temp');
             final_span.innerHTML += temp[0].innerHTML;
-            console.log($('#final_temp li')[2]);
             writefile(all_text);
             temp[0].innerHTML = "";
           },
