@@ -28,7 +28,6 @@
     </script>
     
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 </head>
@@ -37,4 +36,5 @@
 <%= yield %>
 
 </body>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </html>
