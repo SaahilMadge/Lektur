@@ -83,7 +83,10 @@ perspective effects (not including the modals and the overlay).
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	width: 50%;
+	/* width: 50%; */
+
+	width: 75%; /* added by irvin */
+
 	max-width: 1000px;
 	min-width: 320px;
 	height: auto;
@@ -303,6 +306,9 @@ perspective effects (not including the modals and the overlay).
 	transition: all 0.5s 0.1s;
 }
 
+.md-content button.md-close {
+	font-size: 1.3em;
+}
 @media screen and (max-width: 32em) {
 	body { font-size: 75%; }
 }
