@@ -84,6 +84,8 @@ function updateCountry() {
 
 var create_email = false;
 var final_transcript = '';
+var counter = 0;
+var all_text = '';
 var recognizing = false;
 var ignore_onend;
 var start_timestamp;
@@ -170,6 +172,26 @@ if (!('webkitSpeechRecognition' in window)) {
     final_transcript = capitalize(final_transcript);
     if (final_transcript)
     {
+      counter++;
+      all_text += final_transcript;
+      if ((counter%4) == 0)
+      {
+        $.ajax({
+          type: "GET",
+          crossDomain: true,
+          dataType: 'jsonp',
+          jsonp: 'jsonp',
+          url: "http://access.alchemyapi.com/calls/text/TextGetRankedConcepts",
+          success: function(data) {
+            console.log(data);
+            if (data.concepts.length > 0) {
+              if (data.concepts[0].relevance > 0.75)
+                final_span.innerHTML += "<li style='color:blue;'>" + data.concepts[0].text + "</li>";
+            }
+          },
+          data: { outputMode: "json", text: all_text, apikey: "12c03efad5071dc17762332480c35cf703a3315b" }
+        });
+      }
       final_span.innerHTML += "<li style='color:" + color + ";' class='bullet-point'>" + linebreak(final_transcript) + ".  " + "</li>";
       // bit of a hack...inefficient
       $('.bullet-point').hover(function(){
