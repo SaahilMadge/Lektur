@@ -42,7 +42,7 @@ WebFont.load({
       }
       </script>
       <div class="md-content">
-        <h3> Hello World </h3>
+        <h3 id="filename-title"> Hello World </h3>
         <div>
           <!--<div class="w-form">
             <form name="email-form" data-name="Email Form">
@@ -55,6 +55,9 @@ WebFont.load({
 
           <div class="compact marquee">
               <div id="info">
+                <p id="info_saved" style="display:none">
+                  Your notes were successfully saved!
+                </p>
                 <p id="info_start">
                   Click on the microphone icon and begin speaking for as long as you like.
                 </p>
@@ -106,8 +109,8 @@ WebFont.load({
          
               </div>
           
-          <button style="float:left; font-size: 20px; padding-left: 10px;">IMPORT.</button>
-          <button style="float:left; font-size: 20px; margin-left: 20px;">EXPORT.</button>
+          <button id="import-button" onclick="" style="float:left; font-size: 20px; padding-left: 10px;">IMPORT.</button>
+          <button id="export-button" onclick="exportButton(event)" style="float:left; font-size: 20px; margin-left: 20px;">EXPORT.</button>
 
           <button class="md-close" style="float:right; font-size: 20px;">CLOSE.</button>
 

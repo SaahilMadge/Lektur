@@ -258,33 +258,13 @@ function emailButton() {
   email_info.style.display = 'inline-block';
   showInfo('');
 }
-
-function startButton(event) {
-  if (recognizing) {
-    recognition.stop();
-    return;
-  }
-  if (!fileselected) {
-    filepicker.pick(function(InkBlob){
-      inkblob = InkBlob;
-      filepicker.read(inkblob, function(data){
-        debugger;
-        final_span.innerHTML = data;
-      });
-      fileselected = true;
-      final_transcript = '';
-      recognition.lang = select_dialect.value;
-      recognition.start();
-      ignore_onend = false;
-      //final_span.innerHTML = '';
-      interim_span.innerHTML = '';
-      start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-      showInfo('info_allow');
-      showButtons('none');
-      start_timestamp = event.timeStamp;
+function importButton(event) {
+  filepicker.pick({mimetype:'text/plain'}, function(InkBlob){
+    inkblob = InkBlob;
+    filepicker.read(inkblob, function(data){
+      final_span.innerHTML = data;
     });
-  }
-  else {
+    fileselected = true;
     final_transcript = '';
     recognition.lang = select_dialect.value;
     recognition.start();
@@ -295,7 +275,43 @@ function startButton(event) {
     showInfo('info_allow');
     showButtons('none');
     start_timestamp = event.timeStamp;
+  });
+}
+
+function exportButton(event) {
+  if (inkblob) {
+    filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
+      showInfo('info_saved');
+    });
   }
+  else {
+    filepicker.store(all_text,
+        {filename:'lecture_notes.txt', location: 'S3'},
+        function(stored_file){
+            filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
+                $("#filename-title").text(InkBlob.filename);
+                inkblob = InkBlob;
+            }
+        );
+    });
+  }
+}
+
+function startButton(event) {
+  if (recognizing) {
+    recognition.stop();
+    return;
+  }
+  final_transcript = '';
+  recognition.lang = select_dialect.value;
+  recognition.start();
+  ignore_onend = false;
+  //final_span.innerHTML = '';
+  interim_span.innerHTML = '';
+  start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
+  showInfo('info_allow');
+  showButtons('none');
+  start_timestamp = event.timeStamp;
 }
 
 function showInfo(s) {
