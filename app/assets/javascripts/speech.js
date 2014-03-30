@@ -278,13 +278,13 @@ function importButton(event) {
 
 function exportButton(event) {
   if (inkblob) {
-    filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
+    filepicker.export(inkblob, {service:'DROPBOX'}, function(InkBlob) {
       showInfo('info_saved');
     });
   }
   else {
-    filepicker.store(all_text,
-        {filename:'lecture_notes.txt', location: 'S3'},
+    filepicker.store($('#final_span').text(),
+        {filename:'lecture_notes', location: 'S3'},
         function(stored_file){
             filepicker.export(stored_file, {service:'DROPBOX'}, function(InkBlob) {
                 $("#filename-title").text(InkBlob.filename);
