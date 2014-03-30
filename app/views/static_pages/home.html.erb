@@ -1,195 +1,157 @@
-<!DOCTYPE html><!--HTML5 doctype-->
-<html>
-    
-<!-- Head -->
-<head>
-    <meta charset="utf-8">
-	<title>Lektur</title>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-	<style type="text/css">
-		/* Prevent copy paste for all elements except text fields */
-		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
-		input, textarea  { -webkit-user-select:text; }
-		body { background-color:white; color:black }
-	</style>
-    <!-- Intel SDK Source -->
-	<script src='assets/intelxdk.js'></script>
-	<script type="text/javascript">
-		/* This code is used to run as soon as Intel activates */
-		var onDeviceReady=function(){
-		//hide splash screen
-		intel.xdk.device.hideSplashScreen();
-		};
-		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
-	</script>
-    <link rel="stylesheet" type="text/css" href="assets/normalize.css">
-    <link rel="stylesheet" type="text/css" href="assets/struc.css">
-    <link rel="stylesheet" type="text/css" href="assets/style.css.scss">
-
-    <script src="js/modernizr.custom.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-    <script>
-    WebFont.load({
-      google: {
-        families: ["Montserrat:400,700","Oswald:300,400,700","Bitter:400,700","Great Vibes:400"]
-      }
-    });
-    </script>
-    <script type="text/javascript" src="assets/modernizr.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/component.css" />
-    <script src="assets/modernizr.custom.js"></script>
-    
-</head>
+<style type="text/css">
+	/* Prevent copy paste for all elements except text fields */
+	*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+	input, textarea  { -webkit-user-select:text; }
+	body { background-color:white; color:black }
+</style>
+<script>
+WebFont.load({
+  google: {
+    families: ["Montserrat:400,700","Oswald:300,400,700","Bitter:400,700","Great Vibes:400"]
+  }
+});
+</script>
 
 
-<!-- Body -->
-<body>
-  <header class="navbar">
-    <div class="w-container">
-      <div class="w-row">
-        <div class="w-col w-col-4">
-          <div class="app-name">
-            <div class="title">Lektur.io</div>
-          </div>
-        </div>
-        <div class="w-col w-col-8 nav-column"></div>
-      </div>
-    </div>
-  </header>
-  <div class="section hero">
-    <div class="w-container header">
-      <h1>TAKING&nbsp;NOTES HAS&nbsp;NEVER&nbsp;BEEN EASIER.</h1>
-      <h2>Just sit back, relax, and let it record.</h2>
-      <button class="md-trigger" data-modal="modal-19">GET&nbsp;STARTED</button>
-
-      <!--<button class="button" class="md-trigger" data-modal="modal-12" class="button large"></button>-->
-
-      <div class="md-modal md-effect-19" id="modal-19">
-        <script type="text/javascript">
-          function transcribe(words) {
-          document.getElementById("speech").value = words;
-          document.getElementById("mic").value = "";
-          document.getElementById("speech").focus();
-        }
-        </script>
-        <div class="md-content">
-          <h3> Hello World </h3>
-          <div>
-            <!--<div class="w-form">
-              <form name="email-form" data-name="Email Form">
-                <textarea id="speech" class="w-input text-area"></textarea>
-              </form>
-            </div>-->
-              
-              
-            <div class="browser-landing" id="main">
-
-            <div class="compact marquee">
-                <div id="info">
-                  <p id="info_start">
-                    Click on the microphone icon and begin speaking for as long as you like.
-                  </p>
-                  <p id="info_speak_now" style="display:none">
-                    Speak now.
-                  </p>
-                  <p id="info_no_speech" style="display:none">
-                    No speech was detected. You may need to adjust your <a href=
-                    "//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
-                    settings</a>.
-                  </p>
-                  <p id="info_no_microphone" style="display:none">
-                    No microphone was found. Ensure that a microphone is installed and that
-                    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                    microphone settings</a> are configured correctly.
-                  </p>
-                  <p id="info_allow" style="display:none">
-                    Click the "Allow" button above to enable your microphone.
-                  </p>
-                  <p id="info_denied" style="display:none">
-                    Permission to use microphone was denied.
-                  </p>
-                  <p id="info_blocked" style="display:none">
-                    Permission to use microphone is blocked. To change, go to
-                    chrome://settings/contentExceptions#media-stream
-                  </p>
-                  <p id="info_upgrade" style="display:none">
-                    Web Speech API is not supported by this browser. Upgrade to <a href=
-                    "//www.google.com/chrome">Chrome</a> version 25 or later.
-                  </p>
-                </div>
-                <div id="div_start">
-                    <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
-                        src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif"></button>
-                </div>
-                <div id="results">
-                    <span class="final" id="final_span"></span> <span class="interim" id=
-                    "interim_span"></span>
-                </div>
-              
-                <div class="compact marquee" id="div_language">
-                  <select id="select_language" onchange="updateCountry()">
-                    </select>&nbsp;&nbsp; <select id="select_dialect">
-                    </select>
-                </div>
-            </div>
-           
-                </div>
-            <button class="md-close" style="float:right;">Close.</button>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <img class="laptop" src="assets/bgpic.png" width="800" alt="5336fa172c15f81041000697_bgpic.png">
-  </div>
-    
-  <div class="section grey">
+<header class="navbar">
+  <div class="w-container">
     <div class="w-row">
       <div class="w-col w-col-4">
-        <div class="w-container how-it-works">
-          <div class="stepmain">STEP 1:&nbsp;Record &nbsp;Through Your Device.
-            <br>(Only Chrome Compatible)</div>
-          <img class="icon" src="assets/Device-Laptop-256.png" width="128" alt="5336ffa42c15f810410006ca_Device-Laptop-256.png">
+        <div class="app-name">
+          <div class="title">lektur.io</div>
         </div>
       </div>
-      <div class="w-col w-col-4">
-        <div class="w-container how-it-works">
-          <div class="stepmain">STEP 2:&nbsp;Our Engine Will Convert Audio into
-            <br>Clear and Coherent Notes via NLP.</div>
-          <img class="icon" src="assets/Filter-New-256.png" width="128" alt="5336ffe5b51c26e31e0006d1_Filter-New-256.png">
-        </div>
-      </div>
-      <div class="w-col w-col-4">
-        <div class="w-container how-it-works">
-          <div class="stepmain">STEP 3:&nbsp;Export to Dropbox, Evernote,
-            <br>or Google Docs.&nbsp;</div>
-          <img class="icon" src="assets/Document-01-256.png" width="128" alt="5336ffeeb51c26e31e0006e8_Document-01-256.png">
+      <div class="w-col w-col-8 nav-column"></div>
+    </div>
+  </div>
+</header>
+<div class="section hero">
+  <div class="w-container header">
+    <h1>TAKING&nbsp;NOTES HAS&nbsp;NEVER&nbsp;BEEN EASIER.</h1>
+    <h2>Just sit back, relax, and let it record.</h2>
+    <button class="md-trigger" data-modal="modal-19">GET&nbsp;STARTED</button>
+
+    <!--<button class="button" class="md-trigger" data-modal="modal-12" class="button large"></button>-->
+
+    <div class="md-modal md-effect-19" id="modal-19">
+      <script type="text/javascript">
+        function transcribe(words) {
+        document.getElementById("speech").value = words;
+        document.getElementById("mic").value = "";
+        document.getElementById("speech").focus();
+      }
+      </script>
+      <div class="md-content">
+        <h3> Hello World </h3>
+        <div>
+          <!--<div class="w-form">
+            <form name="email-form" data-name="Email Form">
+              <textarea id="speech" class="w-input text-area"></textarea>
+            </form>
+          </div>-->
+            
+            
+          <div class="browser-landing" id="main">
+
+          <div class="compact marquee">
+              <div id="info">
+                <p id="info_start">
+                  Click on the microphone icon and begin speaking for as long as you like.
+                </p>
+                <p id="info_speak_now" style="display:none">
+                  Speak now.
+                </p>
+                <p id="info_no_speech" style="display:none">
+                  No speech was detected. You may need to adjust your <a href=
+                  "//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
+                  settings</a>.
+                </p>
+                <p id="info_no_microphone" style="display:none">
+                  No microphone was found. Ensure that a microphone is installed and that
+                  <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                  microphone settings</a> are configured correctly.
+                </p>
+                <p id="info_allow" style="display:none">
+                  Click the "Allow" button above to enable your microphone.
+                </p>
+                <p id="info_denied" style="display:none">
+                  Permission to use microphone was denied.
+                </p>
+                <p id="info_blocked" style="display:none">
+                  Permission to use microphone is blocked. To change, go to
+                  chrome://settings/contentExceptions#media-stream
+                </p>
+                <p id="info_upgrade" style="display:none">
+                  Web Speech API is not supported by this browser. Upgrade to <a href=
+                  "//www.google.com/chrome">Chrome</a> version 25 or later.
+                </p>
+              </div>
+              <div id="div_start">
+                  <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
+                      src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif"></button>
+              </div>
+              <div id="results">
+                  <span class="final" id="final_span"></span> <span class="interim" id=
+                  "interim_span"></span>
+              </div>
+            
+              <div class="compact marquee" id="div_language">
+                <select id="select_language" onchange="updateCountry()">
+                  </select>&nbsp;&nbsp; <select id="select_dialect">
+                  </select>
+              </div>
+          </div>
+         
+              </div>
+          <button class="md-close" style="float:right;">Close.</button>
+
         </div>
       </div>
     </div>
-    <h2 class="subheader">Yup. It’s Really That Simple.</h2>
+
   </div>
-  <div class="section grey footer">
-    <div class="w-container">
-      <p class="footer-text">Made with Love <a href="http://hackprinceton.com/" style="text-decoration: none;">@HackPrinceton Spring 2014.</a> </p>
-      <p class="footer-text footer-text-2">Issues? Feed? Contact us at SeanOh@Princeton.edu</p>
+  <img class="laptop" src="assets/bgpic.png" width="800" alt="5336fa172c15f81041000697_bgpic.png">
+</div>
+  
+<div class="section grey">
+  <div class="w-row">
+    <div class="w-col w-col-4">
+      <div class="w-container how-it-works">
+        <div class="stepmain">STEP 1:&nbsp;Record &nbsp;Through Your Device.
+          <br>(Only Chrome Compatible)</div>
+        <img class="icon" src="assets/Device-Laptop-256.png" width="128" alt="5336ffa42c15f810410006ca_Device-Laptop-256.png">
+      </div>
+    </div>
+    <div class="w-col w-col-4">
+      <div class="w-container how-it-works">
+        <div class="stepmain">STEP 2:&nbsp;Our Engine Will Convert Audio into
+          <br>Clear and Coherent Notes via NLP.</div>
+        <img class="icon" src="assets/Filter-New-256.png" width="128" alt="5336ffe5b51c26e31e0006d1_Filter-New-256.png">
+      </div>
+    </div>
+    <div class="w-col w-col-4">
+      <div class="w-container how-it-works">
+        <div class="stepmain">STEP 3:&nbsp;Export to Dropbox, Evernote,
+          <br>or Google Docs.&nbsp;</div>
+        <img class="icon" src="assets/Document-01-256.png" width="128" alt="5336ffeeb51c26e31e0006e8_Document-01-256.png">
+      </div>
     </div>
   </div>
-    
-  <!-- Overlay -->
-    <div class="md-overlay"></div>
+  <h2 class="subheader">Yup. It’s Really That Simple.</h2>
+</div>
+<div class="section grey footer">
+  <div class="w-container">
+    <p class="footer-text">Made with Love <a href="http://hackprinceton.com/" style="text-decoration: none;">@HackPrinceton Spring 2014.</a> </p>
+    <p class="footer-text footer-text-2">Issues? Feed? Contact us at SeanOh@Princeton.edu</p>
+  </div>
+</div>
+  
+<!-- Overlay -->
+  <div class="md-overlay"></div>
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/struc.js"></script>
-  <!-- classie.js by @desandro: https://github.com/desandro/classie -->
-  <script src="assets/classie.js"></script>
-  <!--<script src="js/css-filters-polyfill.js"></script>
-  <script src="js/cssParser.js"></script>-->
-  <script src="assets/modalEffects.js"></script>
-  <script src="assets/speech.js"></script>
-
-
-</body>
-</html>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="assets/struc.js"></script>
+<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+<script src="assets/classie.js"></script>
+<script src="assets/modalEffects.js"></script>
+<script src="assets/speech.js"></script>
