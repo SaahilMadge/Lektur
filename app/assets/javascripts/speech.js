@@ -87,7 +87,6 @@ var final_transcript = '';
 var counter = 0;
 var all_text = '';
 var recognizing = false;
-var fileselected = false;
 var ignore_onend;
 var start_timestamp;
 if (!('webkitSpeechRecognition' in window)) {
@@ -187,11 +186,7 @@ if (!('webkitSpeechRecognition' in window)) {
             console.log(data);
             if (data.concepts.length > 0) {
               if (data.concepts[0].relevance > 0.75)
-              {
-                // found a topic
-                final_span.innerHTML += "<li style='color:blue;'>" + data.concepts[0].text + "</li>";
-                writefile(all_text);
-              }
+                final_span.innerHTML += "<li style='color:#AEEEEE;'>" + data.concepts[0].text + "</li>";
             }
           },
           data: { outputMode: "json", text: all_text, apikey: "12c03efad5071dc17762332480c35cf703a3315b" }
@@ -264,38 +259,16 @@ function startButton(event) {
     recognition.stop();
     return;
   }
-  if (!fileselected) {
-    filepicker.pick(function(InkBlob){
-      inkblob = InkBlob;
-      filepicker.read(inkblob, function(data){
-        debugger;
-        final_span.innerHTML = data;
-      });
-      fileselected = true;
-      final_transcript = '';
-      recognition.lang = select_dialect.value;
-      recognition.start();
-      ignore_onend = false;
-      //final_span.innerHTML = '';
-      interim_span.innerHTML = '';
-      start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-      showInfo('info_allow');
-      showButtons('none');
-      start_timestamp = event.timeStamp;
-    });
-  }
-  else {
-    final_transcript = '';
-    recognition.lang = select_dialect.value;
-    recognition.start();
-    ignore_onend = false;
-    //final_span.innerHTML = '';
-    interim_span.innerHTML = '';
-    start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
-    showInfo('info_allow');
-    showButtons('none');
-    start_timestamp = event.timeStamp;
-  }
+  final_transcript = '';
+  recognition.lang = select_dialect.value;
+  recognition.start();
+  ignore_onend = false;
+  //final_span.innerHTML = '';
+  interim_span.innerHTML = '';
+  start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
+  showInfo('info_allow');
+  showButtons('none');
+  start_timestamp = event.timeStamp;
 }
 
 function showInfo(s) {
